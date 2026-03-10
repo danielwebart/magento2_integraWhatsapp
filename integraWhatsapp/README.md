@@ -7,62 +7,55 @@ Este módulo integra o WhatsApp Business ao Magento 2, permitindo gerenciar conf
 - Magento 2.4.x
 - PHP 7.4+
 
-## Instalação via Composer (Path Repository)
+## Instalação
 
-Como este módulo está em um repositório privado ou monorepo (`magento2_modulos`), a instalação recomendada é utilizando o repositório local (`path`).
+### Opção 1: Path Repository (Recomendada)
 
-### Passo 1: Clonar o Repositório de Módulos
+Como este módulo está localizado em um subdiretório (`integraWhatsapp`) de um repositório maior (`magento2_modulos`), a instalação via **Path Repository** é a mais simples e funciona tanto para repositórios privados quanto públicos.
 
-Clone o repositório `magento2_modulos` em uma pasta acessível ao seu projeto Magento (por exemplo, na raiz, ao lado da pasta `vendor` ou em `packages/`).
+1.  **Clone o repositório** em uma pasta auxiliar (ex: `packages/`):
+    ```bash
+    mkdir packages
+    cd packages
+    git clone https://github.com/danielwebart/magento2_modulos.git .
+    ```
 
-```bash
-cd /caminho/para/seu/projeto/magento
-mkdir packages
-cd packages
-git clone https://github.com/danielwebart/magento2_modulos.git .
-```
+2.  **Configure o `composer.json`** do seu projeto Magento:
+    ```json
+    "repositories": {
+        "integra-whatsapp": {
+            "type": "path",
+            "url": "packages/integraWhatsapp",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
+    ```
 
-A estrutura final deve ficar parecida com:
-```
-magento_root/
-├── app/
-├── vendor/
-├── composer.json
-└── packages/
-    └── integraWhatsapp/
-        ├── composer.json
-        ├── registration.php
-        └── ...
-```
+3.  **Instale o módulo**:
+    ```bash
+    composer require integra/module-whatsapp
+    ```
 
-### Passo 2: Configurar o `composer.json` do Projeto Magento
+### Opção 2: Repositório VCS (Se o módulo estivesse na raiz)
 
-Edite o arquivo `composer.json` na raiz do seu projeto Magento e adicione o repositório do tipo `path`:
+Se este módulo estivesse na **raiz** de um repositório (público ou privado), você não precisaria clonar manualmente. Bastaria adicionar o repositório ao `composer.json`:
 
 ```json
 "repositories": {
     "integra-whatsapp": {
-        "type": "path",
-        "url": "packages/integraWhatsapp",
-        "options": {
-            "symlink": true
-        }
+        "type": "vcs",
+        "url": "https://github.com/danielwebart/magento2_modulos.git"
     }
 }
 ```
-*Nota: Se você já tem outros repositórios configurados, adicione este à lista.*
 
-### Passo 3: Requerer o Módulo
+**Nota:** Como o arquivo `composer.json` deste módulo **não está na raiz** do repositório Git, o Composer não consegue encontrá-lo automaticamente usando o tipo `vcs`. Por isso, a **Opção 1** é necessária neste caso específico de "monorepo".
 
-Execute o comando `composer require` para instalar o módulo:
+## Habilitar o Módulo
 
-```bash
-composer require integra/module-whatsapp
-```
-
-### Passo 4: Habilitar o Módulo
-
-Após a instalação, habilite o módulo no Magento:
+Após a instalação:
 
 ```bash
 php bin/magento module:enable Integra_Whatsapp
