@@ -6,6 +6,12 @@
             <argument name="resourceModel" xsi:type="string">Integra\Whatsapp\Model\ResourceModel\Config</argument>
         </arguments>
     </virtualType>
+    <virtualType name="IntegraWhatsapp\Model\ResourceModel\Config\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">intwhats_config</argument>
+            <argument name="resourceModel" xsi:type="string">Integra\Whatsapp\Model\ResourceModel\Config</argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -14,6 +20,12 @@
         </arguments>
     </type>
     <type name="Integra\Whatsapp\Model\ResourceModel\Config\Grid\Collection">
+        <arguments>
+            <argument name="eventPrefix" xsi:type="string">integra_whatsapp_config_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">config_grid_collection</argument>
+        </arguments>
+    </type>
+    <type name="IntegraWhatsapp\Model\ResourceModel\Config\Grid\Collection">
         <arguments>
             <argument name="eventPrefix" xsi:type="string">integra_whatsapp_config_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">config_grid_collection</argument>
