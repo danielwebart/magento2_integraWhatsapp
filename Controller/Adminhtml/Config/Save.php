@@ -24,9 +24,13 @@ class Save extends Action
         $data = $this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
+            if (isset($data['data']) && is_array($data['data'])) {
+                $data = $data['data'];
+            }
             if (isset($data['config']) && is_array($data['config'])) {
                 $data = $data['config'];
             }
+            unset($data['entity_id']);
             $id = $this->getRequest()->getParam('entity_id');
             $model = $this->configFactory->create();
             if ($id) {
