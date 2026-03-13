@@ -49,12 +49,12 @@ class DataProvider extends AbstractDataProvider
         foreach ($items as $model) {
             $id = (int)$model->getId();
             $rowData = $model->getData();
-            $this->loadedData[$id] = [
+            $entityData = $rowData;
+            $entityData['config'] = $rowData;
+            $entityData['data'] = [
                 'config' => $rowData,
-                'data' => [
-                    'config' => $rowData,
-                ],
             ];
+            $this->loadedData[$id] = $entityData;
         }
         $data = $this->dataPersistor->get('integra_whatsapp_config');
         if (!empty($data)) {
@@ -62,12 +62,12 @@ class DataProvider extends AbstractDataProvider
             $model->setData($data);
             $id = (int)$model->getId();
             $rowData = $model->getData();
-            $this->loadedData[$id ?: 0] = [
+            $entityData = $rowData;
+            $entityData['config'] = $rowData;
+            $entityData['data'] = [
                 'config' => $rowData,
-                'data' => [
-                    'config' => $rowData,
-                ],
             ];
+            $this->loadedData[$id ?: 0] = $entityData;
             $this->dataPersistor->clear('integra_whatsapp_config');
         }
         return $this->loadedData;
