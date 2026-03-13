@@ -99,9 +99,9 @@
                     </item>
                 </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataType" xsi:type="string">select</item>
                     <item name="label" xsi:type="string" translate="true">API de Integração</item>
-                    <item name="formElement" xsi:type="string">radios</item>
+                    <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">25</item>
                     <item name="dataScope" xsi:type="string">api_provider</item>
