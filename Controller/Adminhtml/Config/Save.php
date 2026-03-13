@@ -30,7 +30,7 @@ class Save extends Action
             if (isset($data['config']) && is_array($data['config'])) {
                 $data = $data['config'];
             }
-            $id = (int)($data['entity_id'] ?? $this->getRequest()->getParam('entity_id'));
+            $id = (int)($data['entity_id'] ?? $this->getRequest()->getParam('entity_id') ?? $this->getRequest()->getParam('id'));
             unset($data['entity_id']);
 
             $apiProvider = $data['api_provider'] ?? 'facebook';
@@ -61,12 +61,12 @@ class Save extends Action
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the configuration.'));
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $model->getId()]);
+                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $model->getId(), 'id' => $model->getId()]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
-                return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id]);
+                return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id, 'id' => $id]);
             }
         }
         return $resultRedirect->setPath('*/*/');

@@ -36,7 +36,11 @@ class DataProvider extends AbstractDataProvider
         }
         $this->loadedData = [];
 
-        $requestedId = (int)$this->request->getParam($this->getRequestFieldName());
+        $requestedId = (int)(
+            $this->request->getParam($this->getRequestFieldName())
+            ?: $this->request->getParam('entity_id')
+            ?: $this->request->getParam('id')
+        );
         if ($requestedId) {
             $this->collection->addFieldToFilter($this->getPrimaryFieldName(), $requestedId);
         }

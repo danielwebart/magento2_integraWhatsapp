@@ -35,7 +35,8 @@ class ConfigActions extends Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
-                                    'entity_id' => $item['entity_id']
+                                    'entity_id' => $item['entity_id'],
+                                    'id' => $item['entity_id']
                                 ]
                             ),
                             'label' => __('Edit')
@@ -44,7 +45,8 @@ class ConfigActions extends Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,
                                 [
-                                    'entity_id' => $item['entity_id']
+                                    'entity_id' => $item['entity_id'],
+                                    'id' => $item['entity_id']
                                 ]
                             ),
                             'label' => __('Delete'),

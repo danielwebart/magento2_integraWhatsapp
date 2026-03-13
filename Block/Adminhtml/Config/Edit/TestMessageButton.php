@@ -24,6 +24,6 @@ class TestMessageButton extends GenericButton implements ButtonProviderInterface
 
     private function getTestUrl($configId)
     {
-        return $this->getUrl('*/*/testMessage', ['entity_id' => $configId]);
+        return $this->getUrl('*/*/testMessage', ['entity_id' => $configId, 'id' => $configId]);
     }
 }
