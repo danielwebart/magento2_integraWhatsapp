@@ -51,9 +51,9 @@ class DataProvider extends AbstractDataProvider
             $rowData = $model->getData();
             $entityData = $rowData;
             $entityData['config'] = $rowData;
-            $entityData['data'] = [
-                'config' => $rowData,
-            ];
+            $dataScopeData = $rowData;
+            $dataScopeData['config'] = $rowData;
+            $entityData['data'] = $dataScopeData;
             $this->loadedData[$id] = $entityData;
         }
         $data = $this->dataPersistor->get('integra_whatsapp_config');
@@ -64,9 +64,9 @@ class DataProvider extends AbstractDataProvider
             $rowData = $model->getData();
             $entityData = $rowData;
             $entityData['config'] = $rowData;
-            $entityData['data'] = [
-                'config' => $rowData,
-            ];
+            $dataScopeData = $rowData;
+            $dataScopeData['config'] = $rowData;
+            $entityData['data'] = $dataScopeData;
             $this->loadedData[$id ?: 0] = $entityData;
             $this->dataPersistor->clear('integra_whatsapp_config');
         }
