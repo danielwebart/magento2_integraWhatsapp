@@ -88,6 +88,16 @@
         </field>
         <field name="api_provider">
             <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="array">
+                    <item name="facebook" xsi:type="array">
+                        <item name="value" xsi:type="string">facebook</item>
+                        <item name="label" xsi:type="string" translate="true">Facebook</item>
+                    </item>
+                    <item name="zapi" xsi:type="array">
+                        <item name="value" xsi:type="string">zapi</item>
+                        <item name="label" xsi:type="string" translate="true">Z-API</item>
+                    </item>
+                </item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">API de Integração</item>
@@ -96,16 +106,6 @@
                     <item name="sortOrder" xsi:type="number">25</item>
                     <item name="dataScope" xsi:type="string">api_provider</item>
                     <item name="default" xsi:type="string">facebook</item>
-                    <item name="options" xsi:type="array">
-                        <item name="0" xsi:type="array">
-                            <item name="value" xsi:type="string">facebook</item>
-                            <item name="label" xsi:type="string" translate="true">Facebook</item>
-                        </item>
-                        <item name="1" xsi:type="array">
-                            <item name="value" xsi:type="string">zapi</item>
-                            <item name="label" xsi:type="string" translate="true">Z-API</item>
-                        </item>
-                    </item>
                 </item>
             </argument>
         </field>
