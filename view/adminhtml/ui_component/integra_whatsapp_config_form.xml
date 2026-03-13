@@ -14,6 +14,7 @@
         <item name="buttons" xsi:type="array">
             <item name="back" xsi:type="string">Integra\Whatsapp\Block\Adminhtml\Config\Edit\BackButton</item>
             <item name="delete" xsi:type="string">Integra\Whatsapp\Block\Adminhtml\Config\Edit\DeleteButton</item>
+            <item name="test_message" xsi:type="string">Integra\Whatsapp\Block\Adminhtml\Config\Edit\TestMessageButton</item>
             <item name="save" xsi:type="string">Integra\Whatsapp\Block\Adminhtml\Config\Edit\SaveButton</item>
         </item>
     </argument>
@@ -46,7 +47,7 @@
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">false</item>
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
                     <item name="source" xsi:type="string">config</item>
                     <item name="dataScope" xsi:type="string">entity_id</item>
                 </item>
@@ -85,6 +86,63 @@
                 </item>
             </argument>
         </field>
+        <field name="api_provider">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">API de Integração</item>
+                    <item name="formElement" xsi:type="string">radios</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="dataScope" xsi:type="string">api_provider</item>
+                    <item name="default" xsi:type="string">facebook</item>
+                    <item name="options" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="value" xsi:type="string">facebook</item>
+                            <item name="label" xsi:type="string" translate="true">Facebook</item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="value" xsi:type="string">zapi</item>
+                            <item name="label" xsi:type="string" translate="true">Z-API</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="test_phone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Telefone para Teste</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">26</item>
+                    <item name="dataScope" xsi:type="string">test_phone</item>
+                </item>
+            </argument>
+        </field>
+        <field name="test_message">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Mensagem de Teste</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">27</item>
+                    <item name="dataScope" xsi:type="string">test_message</item>
+                    <item name="default" xsi:type="string">Teste de integração WhatsApp</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="facebook">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Facebook (WhatsApp Cloud API)</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
         <field name="phone_number_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -92,7 +150,7 @@
                     <item name="label" xsi:type="string" translate="true">Phone Number ID</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">config</item>
-                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataScope" xsi:type="string">phone_number_id</item>
                 </item>
             </argument>
@@ -104,7 +162,7 @@
                     <item name="label" xsi:type="string" translate="true">Business Account ID</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">config</item>
-                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
                     <item name="dataScope" xsi:type="string">business_account_id</item>
                 </item>
             </argument>
@@ -116,8 +174,66 @@
                     <item name="label" xsi:type="string" translate="true">Access Token</item>
                     <item name="formElement" xsi:type="string">textarea</item>
                     <item name="source" xsi:type="string">config</item>
-                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
                     <item name="dataScope" xsi:type="string">access_token</item>
+                </item>
+            </argument>
+        </field>
+        <field name="facebook_api_version">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Facebook API Version</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataScope" xsi:type="string">facebook_api_version</item>
+                    <item name="default" xsi:type="string">v23.0</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="zapi">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Z-API</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="zapi_instance_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Instance ID</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">zapi_instance_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="zapi_token">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Token</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">zapi_token</item>
+                </item>
+            </argument>
+        </field>
+        <field name="zapi_client_token">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Client-Token (opcional)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">config</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataScope" xsi:type="string">zapi_client_token</item>
                 </item>
             </argument>
         </field>

@@ -29,6 +29,7 @@ class ConfigActions extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item['entity_id'])) {
+                    $name = $item['name'] ?? '';
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl(
@@ -48,8 +49,8 @@ class ConfigActions extends Column
                             ),
                             'label' => __('Delete'),
                             'confirm' => [
-                                'title' => __('Delete "${ $.$data.name }"'),
-                                'message' => __('Are you sure you want to delete a "${ $.$data.name }" record?')
+                                'title' => __('Delete "%1"', $name),
+                                'message' => __('Are you sure you want to delete "%1"?', $name)
                             ]
                         ]
                     ];

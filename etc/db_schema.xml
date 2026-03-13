@@ -6,6 +6,13 @@
         <column xsi:type="varchar" name="phone_number_id" nullable="true" length="255" comment="Phone Number ID"/>
         <column xsi:type="varchar" name="business_account_id" nullable="true" length="255" comment="Business Account ID"/>
         <column xsi:type="text" name="access_token" nullable="true" comment="Access Token"/>
+        <column xsi:type="varchar" name="api_provider" nullable="false" length="16" default="facebook" comment="API Provider"/>
+        <column xsi:type="varchar" name="facebook_api_version" nullable="true" length="16" default="v23.0" comment="Facebook API Version"/>
+        <column xsi:type="varchar" name="zapi_instance_id" nullable="true" length="255" comment="Z-API Instance ID"/>
+        <column xsi:type="text" name="zapi_token" nullable="true" comment="Z-API Token"/>
+        <column xsi:type="varchar" name="zapi_client_token" nullable="true" length="255" comment="Z-API Client Token"/>
+        <column xsi:type="varchar" name="test_phone" nullable="true" length="32" comment="Test Recipient Phone"/>
+        <column xsi:type="varchar" name="test_message" nullable="true" length="1024" comment="Test Message"/>
         <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false" default="0" comment="Is Active"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>

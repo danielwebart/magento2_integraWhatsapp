@@ -30,8 +30,22 @@ class Save extends Action
             if (isset($data['config']) && is_array($data['config'])) {
                 $data = $data['config'];
             }
+            $id = (int)($data['entity_id'] ?? $this->getRequest()->getParam('entity_id'));
             unset($data['entity_id']);
-            $id = $this->getRequest()->getParam('entity_id');
+
+            $apiProvider = $data['api_provider'] ?? 'facebook';
+            if ($apiProvider === 'facebook') {
+                if (empty($data['phone_number_id']) || empty($data['access_token'])) {
+                    $this->messageManager->addErrorMessage(__('For Facebook, fill Phone Number ID and Access Token.'));
+                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id ?: null]);
+                }
+            } elseif ($apiProvider === 'zapi') {
+                if (empty($data['zapi_instance_id']) || empty($data['zapi_token'])) {
+                    $this->messageManager->addErrorMessage(__('For Z-API, fill Instance ID and Token.'));
+                    return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id ?: null]);
+                }
+            }
+
             $model = $this->configFactory->create();
             if ($id) {
                 $model->load($id);
