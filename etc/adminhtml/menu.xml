@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Integra_Whatsapp::whatsapp" title="WhatsApp Business Integration" module="Integra_Whatsapp" sortOrder="51" parent="Magento_Backend::content" action="integrawhatsapp/config/index" resource="Integra_Whatsapp::whatsapp"/>
+        <add id="Integra_Whatsapp::whatsapp" title="WhatsApp Business Integration" module="Integra_Whatsapp" sortOrder="51" parent="Magento_Backend::content" resource="Integra_Whatsapp::whatsapp"/>
         <add id="Integra_Whatsapp::config" title="Configuração Número/API" module="Integra_Whatsapp" sortOrder="10" parent="Integra_Whatsapp::whatsapp" action="integrawhatsapp/config/index" resource="Integra_Whatsapp::config"/>
     </menu>
 </config>

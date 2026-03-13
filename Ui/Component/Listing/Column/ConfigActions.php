@@ -49,7 +49,7 @@ class ConfigActions extends Column
                             'label' => __('Delete'),
                             'confirm' => [
                                 'title' => __('Delete "${ $.$data.name }"'),
-                                'message' => __('Are you sure you wan\'t to delete a "${ $.$data.name }" record?')
+                                'message' => __('Are you sure you want to delete a "${ $.$data.name }" record?')
                             ]
                         ]
                     ];
