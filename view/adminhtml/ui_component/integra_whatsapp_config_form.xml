@@ -7,7 +7,7 @@
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
+            <item name="dataScope" xsi:type="string"></item>
             <item name="namespace" xsi:type="string">integra_whatsapp_config_form</item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
