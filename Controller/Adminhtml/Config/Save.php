@@ -21,17 +21,28 @@ class Save extends Action
 
     public function execute()
     {
-        $data = $this->getRequest()->getPostValue();
+        $postData = (array)$this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
-        if ($data) {
+        if ($postData) {
+            $data = $postData;
             if (isset($data['data']) && is_array($data['data'])) {
                 $data = $data['data'];
             }
             if (isset($data['config']) && is_array($data['config'])) {
-                $data = $data['config'];
+                $configData = $data['config'];
+                unset($data['config']);
+                $data = array_replace($configData, $data);
             }
-            $id = (int)($data['entity_id'] ?? $this->getRequest()->getParam('entity_id') ?? $this->getRequest()->getParam('id'));
-            unset($data['entity_id']);
+
+            $id = (int)(
+                $data['entity_id']
+                ?? $data['id']
+                ?? $postData['entity_id']
+                ?? $postData['id']
+                ?? $this->getRequest()->getParam('entity_id')
+                ?? $this->getRequest()->getParam('id')
+            );
+            unset($data['entity_id'], $data['id']);
 
             $apiProvider = $data['api_provider'] ?? 'facebook';
             if ($apiProvider === 'facebook') {
