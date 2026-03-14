@@ -48,26 +48,14 @@ class DataProvider extends AbstractDataProvider
         $items = $this->collection->getItems();
         foreach ($items as $model) {
             $id = (int)$model->getId();
-            $rowData = $model->getData();
-            $entityData = $rowData;
-            $entityData['config'] = $rowData;
-            $dataScopeData = $rowData;
-            $dataScopeData['config'] = $rowData;
-            $entityData['data'] = $dataScopeData;
-            $this->loadedData[$id] = $entityData;
+            $this->loadedData[$id] = $model->getData();
         }
         $data = $this->dataPersistor->get('integra_whatsapp_config');
         if (!empty($data)) {
             $model = $this->collection->getNewEmptyItem();
             $model->setData($data);
             $id = (int)$model->getId();
-            $rowData = $model->getData();
-            $entityData = $rowData;
-            $entityData['config'] = $rowData;
-            $dataScopeData = $rowData;
-            $dataScopeData['config'] = $rowData;
-            $entityData['data'] = $dataScopeData;
-            $this->loadedData[$id ?: 0] = $entityData;
+            $this->loadedData[$id ?: 0] = $model->getData();
             $this->dataPersistor->clear('integra_whatsapp_config');
         }
         return $this->loadedData;

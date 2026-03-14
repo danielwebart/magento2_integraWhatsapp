@@ -7,7 +7,7 @@
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string"></item>
+            <item name="dataScope" xsi:type="string">data</item>
             <item name="namespace" xsi:type="string">integra_whatsapp_config_form</item>
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -52,7 +52,6 @@
                     <item name="visible" xsi:type="boolean">false</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">hidden</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="dataScope" xsi:type="string">entity_id</item>
                 </item>
             </argument>
@@ -64,7 +63,6 @@
                     <item name="label" xsi:type="string" translate="true">Módulo Ativo</item>
                     <item name="formElement" xsi:type="string">checkbox</item>
                     <item name="prefer" xsi:type="string">toggle</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataScope" xsi:type="string">is_active</item>
                     <item name="valueMap" xsi:type="array">
@@ -81,7 +79,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Nome da Configuração</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">20</item>
                     <item name="dataScope" xsi:type="string">name</item>
                     <item name="validation" xsi:type="array">
@@ -106,7 +103,6 @@
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="label" xsi:type="string" translate="true">API de Integração</item>
                     <item name="formElement" xsi:type="string">select</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">25</item>
                     <item name="dataScope" xsi:type="string">api_provider</item>
                     <item name="default" xsi:type="string">facebook</item>
@@ -119,7 +115,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Telefone para Teste</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">26</item>
                     <item name="dataScope" xsi:type="string">test_phone</item>
                 </item>
@@ -131,7 +126,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Mensagem de Teste</item>
                     <item name="formElement" xsi:type="string">textarea</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">27</item>
                     <item name="dataScope" xsi:type="string">test_message</item>
                     <item name="default" xsi:type="string">Teste de integração WhatsApp</item>
@@ -153,7 +147,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Phone Number ID</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataScope" xsi:type="string">phone_number_id</item>
                 </item>
@@ -165,7 +158,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Business Account ID</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">20</item>
                     <item name="dataScope" xsi:type="string">business_account_id</item>
                 </item>
@@ -177,7 +169,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Access Token</item>
                     <item name="formElement" xsi:type="string">textarea</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">30</item>
                     <item name="dataScope" xsi:type="string">access_token</item>
                 </item>
@@ -189,7 +180,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Facebook API Version</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">40</item>
                     <item name="dataScope" xsi:type="string">facebook_api_version</item>
                     <item name="default" xsi:type="string">v23.0</item>
@@ -211,7 +201,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Instance ID</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataScope" xsi:type="string">zapi_instance_id</item>
                 </item>
@@ -223,7 +212,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Token</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">20</item>
                     <item name="dataScope" xsi:type="string">zapi_token</item>
                 </item>
@@ -235,7 +223,6 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Client-Token (opcional)</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">config</item>
                     <item name="sortOrder" xsi:type="number">30</item>
                     <item name="dataScope" xsi:type="string">zapi_client_token</item>
                 </item>
