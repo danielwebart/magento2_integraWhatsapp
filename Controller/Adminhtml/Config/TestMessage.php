@@ -44,8 +44,12 @@ class TestMessage extends Action
         }
 
         $provider = (string)($config->getData('api_provider') ?: 'facebook');
-        $testPhone = $this->normalizePhone((string)$config->getData('test_phone'));
-        $testMessage = (string)($config->getData('test_message') ?: 'Teste de integração WhatsApp');
+        $requestPhone = $this->normalizePhone((string)$this->getRequest()->getParam('test_phone'));
+        $testPhone = $requestPhone !== '' ? $requestPhone : $this->normalizePhone((string)$config->getData('test_phone'));
+
+        $requestMessage = (string)$this->getRequest()->getParam('test_message');
+        $requestMessage = trim($requestMessage);
+        $testMessage = $requestMessage !== '' ? $requestMessage : (string)($config->getData('test_message') ?: 'Teste de integração WhatsApp');
 
         if ($testPhone === '') {
             $this->messageManager->addErrorMessage(__('Informe o Telefone para Teste.'));
