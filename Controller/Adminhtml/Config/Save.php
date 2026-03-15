@@ -24,14 +24,52 @@ class Save extends Action
         $postData = (array)$this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($postData) {
-            $data = $postData;
-            if (isset($data['data']) && is_array($data['data'])) {
-                $data = $data['data'];
+            $data = [];
+
+            if (isset($postData['data']['config']) && is_array($postData['data']['config'])) {
+                $data = array_replace($data, $postData['data']['config']);
             }
-            if (isset($data['config']) && is_array($data['config'])) {
-                $configData = $data['config'];
-                unset($data['config']);
-                $data = array_replace($configData, $data);
+            if (isset($postData['data']) && is_array($postData['data'])) {
+                $data = array_replace($data, $postData['data']);
+            }
+            if (isset($postData['config']) && is_array($postData['config'])) {
+                $data = array_replace($data, $postData['config']);
+            }
+
+            $allowedKeys = [
+                'name',
+                'phone_number_id',
+                'business_account_id',
+                'access_token',
+                'api_provider',
+                'facebook_api_version',
+                'zapi_instance_id',
+                'zapi_token',
+                'zapi_client_token',
+                'test_phone',
+                'test_message',
+                'is_active',
+            ];
+
+            $filteredData = [];
+            foreach ($allowedKeys as $key) {
+                if (array_key_exists($key, $data) && !is_array($data[$key])) {
+                    $filteredData[$key] = $data[$key];
+                }
+            }
+
+            if (array_key_exists('is_active', $filteredData)) {
+                $filteredData['is_active'] = (int)filter_var($filteredData['is_active'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? (int)$filteredData['is_active'];
+            }
+
+            $referer = (string)$this->getRequest()->getServer('HTTP_REFERER');
+            $refererId = 0;
+            if ($referer) {
+                if (preg_match('~/entity_id/(\d+)/~', $referer, $m)) {
+                    $refererId = (int)$m[1];
+                } elseif (preg_match('~/id/(\d+)/~', $referer, $m)) {
+                    $refererId = (int)$m[1];
+                }
             }
 
             $id = (int)(
@@ -41,17 +79,17 @@ class Save extends Action
                 ?? $postData['id']
                 ?? $this->getRequest()->getParam('entity_id')
                 ?? $this->getRequest()->getParam('id')
+                ?? $refererId
             );
-            unset($data['entity_id'], $data['id']);
 
-            $apiProvider = $data['api_provider'] ?? 'facebook';
+            $apiProvider = $filteredData['api_provider'] ?? 'facebook';
             if ($apiProvider === 'facebook') {
-                if (empty($data['phone_number_id']) || empty($data['access_token'])) {
+                if (empty($filteredData['phone_number_id']) || empty($filteredData['access_token'])) {
                     $this->messageManager->addErrorMessage(__('For Facebook, fill Phone Number ID and Access Token.'));
                     return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id ?: null]);
                 }
             } elseif ($apiProvider === 'zapi') {
-                if (empty($data['zapi_instance_id']) || empty($data['zapi_token'])) {
+                if (empty($filteredData['zapi_instance_id']) || empty($filteredData['zapi_token'])) {
                     $this->messageManager->addErrorMessage(__('For Z-API, fill Instance ID and Token.'));
                     return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id ?: null]);
                 }
@@ -66,7 +104,11 @@ class Save extends Action
                 }
             }
 
-            $model->setData($data);
+            if ($id) {
+                $model->addData($filteredData);
+            } else {
+                $model->setData($filteredData);
+            }
 
             try {
                 $model->save();
