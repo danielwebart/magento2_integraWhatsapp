@@ -24,18 +24,6 @@ class Save extends Action
         $postData = (array)$this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($postData) {
-            $data = [];
-
-            if (isset($postData['data']['config']) && is_array($postData['data']['config'])) {
-                $data = array_replace($data, $postData['data']['config']);
-            }
-            if (isset($postData['data']) && is_array($postData['data'])) {
-                $data = array_replace($data, $postData['data']);
-            }
-            if (isset($postData['config']) && is_array($postData['config'])) {
-                $data = array_replace($data, $postData['config']);
-            }
-
             $allowedKeys = [
                 'name',
                 'phone_number_id',
@@ -50,6 +38,41 @@ class Save extends Action
                 'test_message',
                 'is_active',
             ];
+
+            $candidates = [];
+            if (isset($postData['data']) && is_array($postData['data'])) {
+                $candidates[] = $postData['data'];
+            }
+            if (isset($postData['data']['config']) && is_array($postData['data']['config'])) {
+                $candidates[] = $postData['data']['config'];
+            }
+            if (isset($postData['config']) && is_array($postData['config'])) {
+                $candidates[] = $postData['config'];
+            }
+
+            $candidates[] = $postData;
+
+            $ranked = [];
+            foreach ($candidates as $candidate) {
+                $score = 0;
+                foreach ($allowedKeys as $key) {
+                    if (array_key_exists($key, $candidate) && !is_array($candidate[$key])) {
+                        $score++;
+                    }
+                }
+                if (!empty($candidate['entity_id']) || !empty($candidate['id'])) {
+                    $score += 1000;
+                }
+                $ranked[] = ['score' => $score, 'data' => $candidate];
+            }
+            usort($ranked, function ($a, $b) {
+                return $a['score'] <=> $b['score'];
+            });
+
+            $data = [];
+            foreach ($ranked as $entry) {
+                $data = array_replace($data, $entry['data']);
+            }
 
             $filteredData = [];
             foreach ($allowedKeys as $key) {
